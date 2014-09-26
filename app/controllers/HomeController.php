@@ -15,9 +15,16 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+//	public function showWelcome()
+//	{
+//		return View::make('hello');
+//	}
+
+	protected $layout = 'layouts.master';
+
+	public function newWelcome()
 	{
-		return View::make('hello');
+		$this->layout->content = View::make('developers.colin');
 	}
 
 }

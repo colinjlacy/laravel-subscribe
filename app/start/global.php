@@ -79,3 +79,13 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+/*
+ * Custom 404
+ */
+App::missing(function($e) {
+	$url = Request::fullUrl();
+	Log::warning("404 for URL: $url");
+	return Response::view('errors.not-found', array('url' => $url), 404);
+});
