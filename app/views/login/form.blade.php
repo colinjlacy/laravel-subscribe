@@ -21,6 +21,8 @@
 		</div>
 	@endif
 
+
+
 	{{ Form::open(array('url' => '/user/login')) }}
 
 	<div class="form-group @if ($errors->has('username')) has-error @endif">

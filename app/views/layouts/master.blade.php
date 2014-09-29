@@ -5,6 +5,7 @@
 	<!--Styles-->
 	<link rel="stylesheet" href="/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
+	<link rel="stylesheet" href="/css/style.css"/>
 
 	<!--Scripts-->
 	<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
@@ -12,7 +13,7 @@
 </head>
 
 <body>
-<header class="navbar navbar-default navbar-fixed-top" role="navigation">
+<header class="navbar navbar-default navbar-top" role="navigation">
 
 	<div class="container">
 		<div class="navbar-header">
@@ -25,12 +26,19 @@
                     </div>
 		<div class="navbar-collapse collapse">
 			<ul id="menu-navigation-menu" class="nav navbar-nav navbar-right">
+				@if (!Auth::check())
 				<li><a href="/user">Login</a></li>
-				@if (Auth::check())
-				<li><a href="{{URL::route('user.edit', Auth::id())}}">Edit your Account</a></li>
 				@endif
 				@if (Auth::check() && Auth::user()->role == 9)
 					<li><a href="{{URL::route('admin.index')}}">Admin Control</a></li>
+				@endif
+				@if (Auth::check())
+				<li><a href="{{URL::route('protected')}}">Protected Pages</a></li>
+				<li><a href="{{URL::route('user.edit', Auth::id())}}">Edit your Account</a></li>
+					<form action="/user/logout/" method="POST" class="pull-right">
+                		<input class="btn btn-default btn-sm" type="submit" value="Logout"/>
+                	</form>
+
 				@endif
 			</ul>
 		</div><!--/.nav-collapse -->

@@ -49,22 +49,22 @@
 	</div>
 	<hr/>
 	<h3>Sign up for Billing:</h3>
-	<div class="form-group @if ($errors->has('')) has-error @endif">
+	<div class="form-group @if ($errors->has('cc')) has-error @endif">
 	{{ Form::label('cc', 'Credit Card Number', array('class' => 'control-label')) }}
 	{{ Form::text('cc', "4242424242424242", array('class' => 'form-control card-number')) }}
 	@if ($errors->has('cc')) <p class="help-block">{{ $errors->first('cc') }}</p> @endif
 	</div>
-	<div class="form-group @if ($errors->has('username')) has-error @endif">
+	<div class="form-group @if ($errors->has('cvc')) has-error @endif">
 	{{ Form::label('cvc', 'CVC', array('class' => 'control-label')) }}
 	{{ Form::text('cvc', "123", array('class' => 'form-control card-cvc')) }}
 	@if ($errors->has('cvc')) <p class="help-block">{{ $errors->first('cvc') }}</p> @endif
 	</div>
-	<div class="form-group @if ($errors->has('email')) has-error @endif">
+	<div class="form-group @if ($errors->has('expm')) has-error @endif">
 	{{ Form::label('expm', 'Expiration Month', array('class' => 'control-label')) }}
 	{{ Form::text('expm', "12", array('class' => 'form-control card-expiry-month')) }}
 	@if ($errors->has('expm')) <p class="help-block">{{ $errors->first('expm') }}</p> @endif
 	</div>
-	<div class="form-group @if ($errors->has('email_conf')) has-error @endif">
+	<div class="form-group @if ($errors->has('expy')) has-error @endif">
 	{{ Form::label('expy', 'Expiration Year', array('class' => 'control-label')) }}
 	{{ Form::text('expy', "2015", array('class' => 'form-control card-expiry-year')) }}
 	@if ($errors->has('expy')) <p class="help-block">{{ $errors->first('expy') }}</p> @endif

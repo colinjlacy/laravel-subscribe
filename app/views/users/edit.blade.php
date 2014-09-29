@@ -12,7 +12,7 @@
 @section('content')
 	<h2>Use the form below to update this user's information:</h2>
 		{{--Note that I had to use a hard URL here; I couldn't get a named route to work--}}
-		{{ Form::model($user, array('method' => 'PATCH', 'url' => array('user/'.$user->id), 'id' => 'payment-form')) }}
+		{{ Form::model($user, array('method' => 'PATCH', 'url' => array('user/'.$user->id), 'id' => 'update-form')) }}
 
 		<div id="payment-errors"></div>
 
@@ -49,28 +49,39 @@
     	@if ($errors->has('password_conf')) <p class="help-block">{{ $errors->first('password_conf') }}</p> @endif
     	</div>
     	<hr/>
-    	<h3>Sign up for Billing!</h3>
-		<div class="form-group @if ($errors->has('cc')) has-error @endif">
-		{{ Form::label('cc', 'Credit Card Number', array('class' => 'control-label')) }}
-		{{ Form::text('cc', "4242424242424242", array('class' => 'form-control card-number')) }}
-		@if ($errors->has('cc')) <p class="help-block">{{ $errors->first('cc') }}</p> @endif
+    	<h3>Your Billing Information:</h3>
+    	<p class="text-muted"><em><strong>Note:</strong> since this is just a demo, this is not currently something that the user can update. Obviously that would change in production</em></p>
+		<div class="well">
+			<div class="form-group">
+				<div class="row form-horizontal">
+					{{ Form::label('last-four', 'Last Four:', array('class' => 'col-sm-2 control-label')) }}
+					<div class="col-sm-10">
+						<p class="form-control-static">...{{$user['last_four']}}</p>
+					</div>
+				</div>
+				{{--{{ Form::text('cc', $user['last_four'], array('class' => 'form-control-static')) }}--}}
+			</div>
+			<div class="form-group">
+				<div class="row form-horizontal">
+					{{ Form::label('plan', 'Your Billing Plan:', array('class' => 'col-sm-2 control-label')) }}
+					<div class="col-sm-10">
+						<p class="form-control-static">{{$user['stripe_plan']}}</p>
+					</div>
+				</div>
+			{{--{{ Form::text('cc', $user['stripe_plan'], array('class' => 'form-control-static')) }}--}}
+			</div>
 		</div>
-		<div class="form-group @if ($errors->has('cvc')) has-error @endif">
-		{{ Form::label('cvc', 'CVC', array('class' => 'control-label')) }}
-		{{ Form::text('cvc', "123", array('class' => 'form-control card-cvc')) }}
-		@if ($errors->has('cvc')) <p class="help-block">{{ $errors->first('cvc') }}</p> @endif
-		</div>
-		<div class="form-group @if ($errors->has('expm')) has-error @endif">
-		{{ Form::label('expm', 'Expiration Month', array('class' => 'control-label')) }}
-		{{ Form::text('expm', "12", array('class' => 'form-control card-expiry-month')) }}
-		@if ($errors->has('expm')) <p class="help-block">{{ $errors->first('expm') }}</p> @endif
-		</div>
-		<div class="form-group @if ($errors->has('expy')) has-error @endif">
-		{{ Form::label('expy', 'Expiration Year', array('class' => 'control-label')) }}
-		{{ Form::text('expy', "2015", array('class' => 'form-control card-expiry-year')) }}
-		@if ($errors->has('expy')) <p class="help-block">{{ $errors->first('expy') }}</p> @endif
-		</div>
+		<hr/>
     	{{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
 
     	{{ Form::close() }}
+
+    	{{--The botton below gives the user the option to delete their account--}}
+		<hr/>
+		<p class="text-muted">Would you like to delete your account from our site?</p>
+		<form method="POST" action="http://laravel.site:8000/user/{{Auth::id()}}" accept-charset="UTF-8">
+			<input name="_method" type="hidden" value="DELETE"><input name="_token" type="hidden" value="x3YwmsZkkihBHe7ZsMxqmmO4FZtc1r9xnPtWj9QN">
+			<input class="btn btn-danger" type="submit" value="Delete">
+		</form>
+
 @stop

@@ -1,7 +1,4 @@
 /bootstrap/compiled.php
-/vendor
-/app/config/services.php
-composer.lock
 .env.*.php
 .env.php
 .DS_Store

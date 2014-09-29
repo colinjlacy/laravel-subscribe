@@ -111,7 +111,7 @@ class UserController extends \BaseController {
 		if ($validator->fails()) {
 
 			// redirect the user back to the form
-			return Redirect::to('user.create')
+			return Redirect::route('user.create')
 				->withErrors($validator)
 				->withInput(Input::except('password', 'password_conf'));
 
@@ -131,6 +131,9 @@ class UserController extends \BaseController {
 
 			// add the user to the database
 			$user->save();
+
+			// Log the user in
+			Auth::login($user);
 
 			// process the user's subscription
 			if(null != Input::get( 'stripeToken' )) {
@@ -228,18 +231,12 @@ class UserController extends \BaseController {
 			if ($input['email'] != $user->email) {
 				$user->email = $input['email'];
 			}
-			if(isset($input['password'])) {
+			if(isset($input['password']) && $input['password'] != "") {
 				$user->password 	= Hash::make($input['password']);
 			}
 
 			// update the user in the database
 			$user->save();
-
-			// process the user's subscription
-			if(null != Input::get( 'stripeToken' )) {
-				$user->subscription('laravelplan1')->create( Input::get( 'stripeToken' ) );
-			}
-
 
 			// Output the view
 			$this->layout->content = View::make('users.updated', array('user' => $user));
