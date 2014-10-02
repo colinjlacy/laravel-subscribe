@@ -11,30 +11,9 @@ class UserTableSeeder extends Seeder
 	public function run()
 	{
 		User::create(array(
-			'name'		=> 'Edward Lacy',
-			'username'	=> 'Mushigats',
-			'email'		=> 'ed@lacy.com',
-			'password'	=> Hash::make('a'),
-			'role'		=> 1
-	));
-		User::create(array(
-			'name'		=> 'Ashley Lacy',
-			'username'	=> 'ashley',
-			'email'		=> 'ashley@lacy.com',
-			'password'	=> Hash::make('a'),
-			'role'		=> 1
-		));
-		User::create(array(
-			'name'		=> 'Kathy Lacy',
-			'username'	=> 'kml',
-			'email'		=> 'km@lacy.com',
-			'password'	=> Hash::make('a'),
-			'role'		=> 1
-		));
-		User::create(array(
-			'name'		=> 'Colin Lacy',
-			'username'	=> 'colinjlacy',
-			'email'		=> 'colin@lacy.com',
+			'name'		=> 'Admin Istrator',
+			'username'	=> 'admin',
+			'email'		=> 'admin@istrator.com',
 			'password'	=> Hash::make('a'),
 			'role'		=> 9
 		));
