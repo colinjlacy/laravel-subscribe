@@ -9,6 +9,7 @@ The app also features the ability to create Admin accounts, which have access to
 For this project, you'll need a [Stripe](https://stripe.com/, "Stripe") key, both private and test.  So best to set those up before moving on to the installation.  You'll also need to create a billing plan called "laravel1".
 
 This is meant to run entirely on a vagrant box, set up with Laravel's [Homestead](http://laravel.com/docs/4.2/homestead, "Homestead") environment.  There easiest way to get this demo up and running:
+
 1. Create a Vagrant box running Homestead, as per the instructions in the link above.
 2. Use Composer to install Laravel 4.2 by running the command `composer create-project laravel/laravel --prefer-dist`.
 3. Open your `Homestead.yaml` file and map your Laravel project's parent directory path to the `~/Code` path.
